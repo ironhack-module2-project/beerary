@@ -5,7 +5,6 @@ const BASE_URL = "https://punkapi.online/v3";
 
 function HomePage() {
   const [randomBeer, setRandomBeer] = useState({});
-  // const [beerImg, setBeerImg] = useState(null);
 
   useEffect(() => {
     axios
@@ -29,16 +28,6 @@ function HomePage() {
     return modifiedId;
   };
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`${BASE_URL}/images/${addZeros(randomBeer.id)}.png`)
-  //     .then((response) => {
-  //       setBeerImg(response.data);
-  //       console.log(beerImg);
-  //     })
-  //     .catch((error) => console.log("ERROR getting image:", error));
-  // }, []);
-
   return (
     <main>
       <h2>This is the home page</h2>
@@ -48,10 +37,7 @@ function HomePage() {
             <h2 className="card-title">{randomBeer.name}</h2>
             <h2 className="card-title">ID: {randomBeer.id}</h2>
             {}
-            <img
-              src={`${BASE_URL}/images/${addZeros(randomBeer.id)}.png`}
-              alt=""
-            />
+            <img src={`${BASE_URL}/images/${randomBeer.image}`} alt="" />
             <p>{randomBeer.tagline}</p>
             <div className="justify-end card-actions">
               <button className="btn btn-primary">Buy Now</button>
