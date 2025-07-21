@@ -27,8 +27,36 @@ function HomePage() {
       .post(`${API_URL}/beers.json`, randomBeer)
       .then((response) => {
         console.log("Success on POST");
+        showToastSuccess();
       })
-      .catch((error) => console.log("ERROR on POST: ", error));
+      .catch((error) => {
+        console.log("ERROR on POST: ", error);
+        showToastFailure();
+      });
+  };
+
+  const showToastSuccess = () => {
+    const container = document.getElementById("toast-container");
+    const toast = document.createElement("div");
+    toast.className = "alert alert-success";
+    toast.innerHTML = "<span>Beer Added Succesfully.</span>";
+
+    container.appendChild(toast);
+    setTimeout(() => {
+      toast.remove();
+    }, 3000);
+  };
+
+  const showToastFailure = () => {
+    const container = document.getElementById("toast-container");
+    const toast = document.createElement("div");
+    toast.className = "alert alert-error";
+    toast.innerHTML = "<span>Error on adding beer</span>";
+
+    container.appendChild(toast);
+    setTimeout(() => {
+      toast.remove();
+    }, 3000);
   };
 
   if (loading)
@@ -90,6 +118,11 @@ function HomePage() {
                 Add Beer
               </button>
             </div>
+            {/* TOAST */}
+            <div
+              id="toast-container"
+              className="toast toast-center toast-middle"
+            ></div>
           </div>
         </div>
       </div>
