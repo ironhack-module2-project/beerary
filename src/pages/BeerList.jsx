@@ -7,6 +7,7 @@ function BeerList() {
   const [beers, setBeers] = useState([]);
   const totalPages = 14;
   const [currentPage, setCurrentPage] = useState(1);
+  const [modalBeer, setModalBeer] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -42,6 +43,11 @@ function BeerList() {
     setCurrentPage(page);
   };
 
+  const openModal = (beer) => {
+    setModalBeer(beer);
+    document.getElementById("my_modal_3").showModal();
+  };
+
   if (loading)
     return (
       <span className="loading loading-spinner text-primary loading-xl"></span>
@@ -49,7 +55,8 @@ function BeerList() {
 
   return (
     <div>
-      <h2 className="text-4xl p-4">List of beers</h2>
+      <h2 className="text-4xl p-4 m-4">List of beers</h2>
+      {/* Pagination */}
       <div className="join">
         {[...Array(totalPages)].map((_, index) => {
           const pageNum = index + 1;
@@ -66,10 +73,11 @@ function BeerList() {
           );
         })}
       </div>
+      {/* grid of beers */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
         {beers.map((beer) => {
           return (
-            <div key={beer.id} className="card bg-base-100 shadow-xl">
+            <div key={beer.id} className="card bg-base-100 shadow-xl glass">
               <figure className="max-h-48 overflow-hidden">
                 <img src={`${BASE_URL}/images/${beer.image}`} alt="beer" />
               </figure>
@@ -78,13 +86,48 @@ function BeerList() {
                 <p>{beer.tagline}</p>
                 <div className="card-actions justify-center">
                   <button className="btn btn-primary">Add Beer</button>
-                  <button className="btn btn-secondary">More details</button>
+                  <button
+                    className="btn btn-secondary"
+                    onClick={() => openModal(beer)}
+                  >
+                    More Details
+                  </button>
                 </div>
               </div>
             </div>
           );
         })}
       </div>
+
+      {/* MODAL */}
+      <dialog id="my_modal_3" className="modal">
+        <div className="modal-box">
+          <form method="dialog">
+            {/* if there is a button in form, it will close the modal */}
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
+          </form>
+          <h3 className="font-bold text-lg">{modalBeer.name}</h3>
+          <figure className="text-center">
+            <img
+              className="max-w-[200px] h-[394px]"
+              src={`${BASE_URL}/images/${modalBeer.image}`}
+              alt="beer"
+            />
+          </figure>
+          <div className="card-body text-left">
+            <h2 className="card-title text-xl">{modalBeer.name}</h2>
+            <p className="max-h-[20px] italic text-base">{modalBeer.tagline}</p>
+            <br />
+            <p>{modalBeer.description}</p>
+            <br />
+          </div>
+          <p className="py-4">Press ESC key or click on ✕ button to close</p>
+        </div>
+      </dialog>
+
+      {/* Pagination */}
       <div className="join">
         {[...Array(totalPages)].map((_, index) => {
           const pageNum = index + 1;
