@@ -49,7 +49,7 @@ function BeerList() {
 
   return (
     <div>
-      <h2 className="text-4xl p-10">List of beers</h2>
+      <h2 className="text-4xl p-4">List of beers</h2>
       <div className="join">
         {[...Array(totalPages)].map((_, index) => {
           const pageNum = index + 1;

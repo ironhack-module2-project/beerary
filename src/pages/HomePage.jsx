@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const BASE_URL = "https://punkapi.online/v3";
+const API_URL =
+  "https://birrioteca-e9e74-default-rtdb.europe-west1.firebasedatabase.app";
 
 function HomePage() {
   const [randomBeer, setRandomBeer] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
@@ -12,17 +15,32 @@ function HomePage() {
       .then((response) => {
         console.log(response.data);
         setRandomBeer(response.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.log("ERROR on GET: ", error);
       });
   }, []);
 
+  const handleSubmit = () => {
+    axios
+      .post(`${API_URL}/beers.json`, randomBeer)
+      .then((response) => {
+        console.log("Success on POST");
+      })
+      .catch((error) => console.log("ERROR on POST: ", error));
+  };
+
+  if (loading)
+    return (
+      <span className="loading loading-spinner text-primary loading-xl"></span>
+    );
+
   return (
     <main>
       <h3>Beer of the day</h3>
       <div className="flex justify-center">
-        <div className="card w-96 bg-base-100 card-xs shadow-sm card-side">
+        <div className="card w-96 p-5 bg-base-100 card-xs shadow-sm card-side glass">
           <figure>
             <img
               className="max-w-[200px] h-[394px]"
@@ -33,7 +51,9 @@ function HomePage() {
           {/* Eliminé la altura fija h-[394px] para que el contenido crezca */}
           <div className="card-body max-w-[200px] text-left">
             <h2 className="card-title text-xl">{randomBeer.name}</h2>
-            <p className="max-h-[20px] italic text-base">{randomBeer.tagline}</p>
+            <p className="max-h-[20px] italic text-base">
+              {randomBeer.tagline}
+            </p>
             <br />
             <p>{randomBeer.description}</p>
             <br />
@@ -42,21 +62,33 @@ function HomePage() {
               tabIndex={0}
               className="collapse bg-base-100 border border-base-300 max-w-[394px]"
             >
-              <div className="collapse-title font-semibold">More Information</div>
+              <div className="collapse-title font-semibold">
+                More Information
+              </div>
               <div className="collapse-content text-left">
-                <p><strong>Enjoy it more with:</strong></p>
+                <p>
+                  <strong>Enjoy it more with:</strong>
+                </p>
                 <ul className="list-disc list-inside">
                   {randomBeer.food_pairing?.map((item, index) => (
                     <li key={index}>{item}</li>
                   ))}
                 </ul>
                 <br />
-                <p><strong>Brewer Tips:</strong> {randomBeer.brewer_tips}</p>
+                <p>
+                  <strong>Brewer Tips:</strong>
+                  <br />{" "}
+                  {randomBeer.brewers_tips !== ""
+                    ? randomBeer.brewers_tips
+                    : "No brewer tips"}
+                </p>
               </div>
             </div>
 
-            <div className="justify-end card-actions">
-              <button className="btn btn-primary">Add Beer</button>
+            <div className="justify-center card-actions">
+              <button className="btn btn-primary" onClick={handleSubmit}>
+                Add Beer
+              </button>
             </div>
           </div>
         </div>
