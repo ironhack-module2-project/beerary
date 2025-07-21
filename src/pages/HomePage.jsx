@@ -10,6 +10,7 @@ function HomePage() {
     axios
       .get(`${BASE_URL}/beers/random`)
       .then((response) => {
+        console.log(response.data);
         setRandomBeer(response.data);
       })
       .catch((error) => {
@@ -17,30 +18,19 @@ function HomePage() {
       });
   }, []);
 
-  const addZeros = (beerId) => {
-    let modifiedId = beerId;
-    if (beerId <= 9) {
-      modifiedId = `00${beerId}`;
-    } else if (beerId <= 99) {
-      modifiedId = `0${beerId}`;
-    }
-
-    return modifiedId;
-  };
-
   return (
     <main>
-      <h2>This is the home page</h2>
+      <h3>Beer of the day</h3>
       <div className="flex justify-center">
-        <div className="card w-96 bg-base-100 card-xs shadow-sm">
+        <div className="card w-96 bg-base-100 card-xs shadow-sm card-side">
+          <figure>
+            <img src={`${BASE_URL}/images/${randomBeer.image}`} alt="beer" />
+          </figure>
           <div className="card-body">
-            <h2 className="card-title">{randomBeer.name}</h2>
-            <h2 className="card-title">ID: {randomBeer.id}</h2>
-            {}
-            <img src={`${BASE_URL}/images/${randomBeer.image}`} alt="" />
-            <p>{randomBeer.tagline}</p>
+            <h2 className="card-title">Name:{randomBeer.name}</h2>
+            <p>Tagline: {randomBeer.tagline}</p>
             <div className="justify-end card-actions">
-              <button className="btn btn-primary">Buy Now</button>
+              <button className="btn btn-primary">Add Beer</button>
             </div>
           </div>
         </div>
