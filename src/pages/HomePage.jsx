@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Toast from "../components/Toast";
 
 const BASE_URL = "https://punkapi.online/v3";
 const API_URL =
@@ -94,11 +95,7 @@ function HomePage(props) {
                 Add Beer
               </button>
             </div>
-            {/* TOAST */}
-            <div
-              id="toast-container"
-              className="toast toast-center toast-middle"
-            ></div>
+            <Toast />
           </div>
         </div>
       </div>
