@@ -93,8 +93,9 @@ function BeerList(props) {
             <button
               key={pageNum}
               onClick={() => handlePageClick(pageNum)}
-              className={`join-item btn ${currentPage === pageNum ? "btn-primary" : ""
-                }`}
+              className={`join-item btn ${
+                currentPage === pageNum ? "btn-primary" : ""
+              }`}
             >
               {pageNum}
             </button>
@@ -113,7 +114,7 @@ function BeerList(props) {
                 <h2 className="card-title">{beer.name}</h2>
                 <p>{beer.tagline}</p>
                 <div className="card-actions justify-center">
-                  {!fireBaseBeersIds.has(beer.id) && (
+                  {!fireBaseBeersIds.has(beer.id) ? (
                     <button
                       className="btn btn-primary"
                       onClick={() => {
@@ -125,6 +126,10 @@ function BeerList(props) {
                       }}
                     >
                       Add Beer
+                    </button>
+                  ) : (
+                    <button className="btn btn-secondary" disabled>
+                      Already Added
                     </button>
                   )}
                   <button
@@ -145,7 +150,9 @@ function BeerList(props) {
       <dialog id="my_modal_3" className="modal">
         <div className="modal-box w-11/12 max-w-4xl">
           <form method="dialog">
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
           </form>
 
           <h3 className="font-bold text-lg mb-4">{modalBeer.name}</h3>
@@ -168,11 +175,12 @@ function BeerList(props) {
 
           {/* Acordeones */}
           <div className="join join-vertical mt-6">
-
             {/* Food Pairing Accordion */}
             <div className="collapse collapse-arrow join-item border border-base-300">
               <input type="radio" name="beer-accordion" defaultChecked />
-              <div className="collapse-title font-semibold">🍽️ Enjoy it more with...</div>
+              <div className="collapse-title font-semibold">
+                🍽️ Enjoy it more with...
+              </div>
               <div className="collapse-content text-sm text-gray-300 text-left">
                 <ul className="list-disc list-inside ml-4">
                   {modalBeer.food_pairing?.map((item, i) => (
@@ -187,7 +195,6 @@ function BeerList(props) {
               <input type="radio" name="beer-accordion" />
               <div className="collapse-title font-semibold">📊 More Info</div>
               <div className="collapse-content text-sm text-gray-300 whitespace-pre-line text-left space-y-6">
-
                 {/* Stats */}
                 <div>
                   <h4 className="font-semibold text-base">Stats</h4>
@@ -200,8 +207,13 @@ function BeerList(props) {
                     <li>Attenuation Level: {modalBeer.attenuation_level}</li>
                     <li>Target FG: {modalBeer.target_fg}</li>
                     <li>Target OG: {modalBeer.target_og}</li>
-                    <li>Volume: {modalBeer.volume?.value} {modalBeer.volume?.unit}</li>
-                    <li>Boil Volume: {modalBeer.boil_volume?.value} {modalBeer.boil_volume?.unit}</li>
+                    <li>
+                      Volume: {modalBeer.volume?.value} {modalBeer.volume?.unit}
+                    </li>
+                    <li>
+                      Boil Volume: {modalBeer.boil_volume?.value}{" "}
+                      {modalBeer.boil_volume?.unit}
+                    </li>
                     <li>First Brewed: {modalBeer.first_brewed}</li>
                   </ul>
                 </div>
@@ -218,30 +230,39 @@ function BeerList(props) {
                 <div>
                   <h4 className="font-semibold text-base">Method</h4>
                   <p className="ml-4">
-                    <strong>Fermentation Temp:</strong> {modalBeer.method?.fermentation?.temp?.value}°{modalBeer.method?.fermentation?.temp?.unit}
+                    <strong>Fermentation Temp:</strong>{" "}
+                    {modalBeer.method?.fermentation?.temp?.value}°
+                    {modalBeer.method?.fermentation?.temp?.unit}
                   </p>
                   <h5 className="font-medium ml-4 mt-2">Mash Temps:</h5>
                   <ul className="list-disc list-inside ml-8">
                     {modalBeer.method?.mash_temp?.map((step, i) => (
                       <li key={i}>
-                        {step.temp?.value}°{step.temp?.unit}, {step.duration ?? "unknown"} min
+                        {step.temp?.value}°{step.temp?.unit},{" "}
+                        {step.duration ?? "unknown"} min
                       </li>
                     ))}
                   </ul>
                   {modalBeer.method?.twist && (
-                    <p className="ml-4 mt-2"><strong>Twist:</strong> {modalBeer.method.twist}</p>
+                    <p className="ml-4 mt-2">
+                      <strong>Twist:</strong> {modalBeer.method.twist}
+                    </p>
                   )}
                 </div>
 
                 {/* Ingredients */}
                 <div>
                   <h4 className="font-semibold text-base">Ingredients</h4>
-                  <p className="ml-4"><strong>Yeast:</strong> {modalBeer.ingredients?.yeast}</p>
+                  <p className="ml-4">
+                    <strong>Yeast:</strong> {modalBeer.ingredients?.yeast}
+                  </p>
 
                   <h5 className="font-medium ml-4 mt-2">Malt:</h5>
                   <ul className="list-disc list-inside ml-8">
                     {modalBeer.ingredients?.malt?.map((m, i) => (
-                      <li key={i}>{m.name} - {m.amount?.value} {m.amount?.unit}</li>
+                      <li key={i}>
+                        {m.name} - {m.amount?.value} {m.amount?.unit}
+                      </li>
                     ))}
                   </ul>
 
@@ -249,7 +270,8 @@ function BeerList(props) {
                   <ul className="list-disc list-inside ml-8">
                     {modalBeer.ingredients?.hops?.map((h, i) => (
                       <li key={i}>
-                        {h.name} ({h.amount?.value} {h.amount?.unit}) - add: {h.add}, attribute: {h.attribute}
+                        {h.name} ({h.amount?.value} {h.amount?.unit}) - add:{" "}
+                        {h.add}, attribute: {h.attribute}
                       </li>
                     ))}
                   </ul>
@@ -266,7 +288,9 @@ function BeerList(props) {
             </div>
           </div>
 
-          <p className="py-4 text-sm text-center text-gray-400">Press ESC or ✕ to close</p>
+          <p className="py-4 text-sm text-center text-gray-400">
+            Press ESC or ✕ to close
+          </p>
         </div>
       </dialog>
 
@@ -278,8 +302,9 @@ function BeerList(props) {
             <button
               key={pageNum}
               onClick={() => handlePageClick(pageNum)}
-              className={`join-item btn ${currentPage === pageNum ? "btn-primary" : ""
-                }`}
+              className={`join-item btn ${
+                currentPage === pageNum ? "btn-primary" : ""
+              }`}
             >
               {pageNum}
             </button>
