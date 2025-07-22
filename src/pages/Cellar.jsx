@@ -1,8 +1,21 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Toast from "../components/Toast";
 
 const API_URL = "https://birrioteca-e9e74-default-rtdb.europe-west1.firebasedatabase.app";
 const BASE_URL = "https://punkapi.online/v3";
+
+const showToastDelete = () => {
+  const container = document.getElementById("toast-container");
+  const toast = document.createElement("div");
+  toast.className = "alert alert-error";
+  toast.innerHTML = "<span>Beer Deleted</span>";
+
+  container.appendChild(toast);
+  setTimeout(() => {
+    toast.remove();
+  }, 3000);
+};
 
 function Cellar() {
   const [cellar, setCellar] = useState([]);
@@ -32,6 +45,7 @@ function Cellar() {
               setCellar([])
               setLoading(false)
             }
+            showToastDelete();
           })
           .catch((error) =>
             console.log("Error getting data from API_URL", error)
@@ -232,8 +246,8 @@ function Cellar() {
           <p className="py-4 text-sm text-center text-gray-400">Press ESC or ✕ to close</p>
         </div>
       </dialog>
-
-
+      <Toast/>
+        
     </div>
   );
 }
