@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Toast from "../components/Toast";
 
 const BASE_URL = "https://punkapi.online/v3";
 
-function BeerList() {
+function BeerList(props) {
   const [beers, setBeers] = useState([]);
   const totalPages = 14;
   const [currentPage, setCurrentPage] = useState(1);
@@ -85,7 +86,12 @@ function BeerList() {
                 <h2 className="card-title">{beer.name}</h2>
                 <p>{beer.tagline}</p>
                 <div className="card-actions justify-center">
-                  <button className="btn btn-primary">Add Beer</button>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => props.handleSubmit(beer)}
+                  >
+                    Add Beer
+                  </button>
                   <button
                     className="btn btn-secondary"
                     onClick={() => openModal(beer)}
@@ -94,6 +100,7 @@ function BeerList() {
                   </button>
                 </div>
               </div>
+              <Toast />
             </div>
           );
         })}

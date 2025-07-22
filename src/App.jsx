@@ -54,7 +54,10 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage handleSubmit={handleSubmit} />} />
-        <Route path="/beers" element={<BeerList />} />
+        <Route
+          path="/beers"
+          element={<BeerList handleSubmit={handleSubmit} />}
+        />
         <Route path="/cellar" element={<Cellar />} />
         <Route path="/about" element={<AboutUs />} />
       </Routes>
