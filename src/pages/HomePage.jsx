@@ -114,7 +114,7 @@ function HomePage(props) {
             </div>
 
             <div className="justify-center card-actions">
-              {!fireBaseBeersIds.has(randomBeer.id) && (
+              {!fireBaseBeersIds.has(randomBeer.id) ? (
                 <button
                   className="btn btn-primary"
                   onClick={() => {
@@ -126,6 +126,10 @@ function HomePage(props) {
                   }}
                 >
                   Add Beer
+                </button>
+              ) : (
+                <button className="btn btn-secondary" disabled>
+                  Already Added
                 </button>
               )}
             </div>
