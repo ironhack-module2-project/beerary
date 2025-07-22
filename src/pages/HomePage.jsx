@@ -9,8 +9,10 @@ const API_URL =
 
 function HomePage(props) {
   const [randomBeer, setRandomBeer] = useState({});
+  const [cellar, setCellar] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // random beer api
   useEffect(() => {
     axios
       .get(`${BASE_URL}/beers/random`)
@@ -24,10 +26,34 @@ function HomePage(props) {
       });
   }, []);
 
+  //Firebase api
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/beers.json`)
+      .then((response) => {
+        const data = response.data;
+        if (data) {
+          const formatted = Object.entries(data).map(([key, value]) => ({
+            firebaseId: key,
+            ...value,
+          }));
+          console.log(formatted);
+          setCellar(formatted);
+          setLoading(false);
+        } else {
+          setCellar([]);
+          setLoading(false);
+        }
+      })
+      .catch((error) => console.log("Error getting data from API_URL", error));
+  }, []);
+
   if (loading)
     return (
       <span className="loading loading-spinner text-primary loading-xl"></span>
     );
+
+  const fireBaseBeersIds = new Set(cellar.map((beer) => beer.id));
 
   return (
     <main>
@@ -88,12 +114,20 @@ function HomePage(props) {
             </div>
 
             <div className="justify-center card-actions">
-              <button
-                className="btn btn-primary"
-                onClick={() => props.handleSubmit(randomBeer)}
-              >
-                Add Beer
-              </button>
+              {!fireBaseBeersIds.has(randomBeer.id) && (
+                <button
+                  className="btn btn-primary"
+                  onClick={() => {
+                    props.handleSubmit(randomBeer);
+                    setCellar((prev) => [
+                      ...prev,
+                      { id: randomBeer.id, ...randomBeer },
+                    ]);
+                  }}
+                >
+                  Add Beer
+                </button>
+              )}
             </div>
             <Toast />
           </div>
