@@ -6,7 +6,7 @@ const BASE_URL = "https://punkapi.online/v3";
 const API_URL =
   "https://birrioteca-e9e74-default-rtdb.europe-west1.firebasedatabase.app";
 
-function HomePage() {
+function HomePage(props) {
   const [randomBeer, setRandomBeer] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -22,43 +22,6 @@ function HomePage() {
         console.log("ERROR on GET: ", error);
       });
   }, []);
-
-  const handleSubmit = (beerObj) => {
-    axios
-      .post(`${API_URL}/beers.json`, beerObj)
-      .then((response) => {
-        console.log("Success on POST");
-        showToastSuccess();
-      })
-      .catch((error) => {
-        console.log("ERROR on POST: ", error);
-        showToastFailure();
-      });
-  };
-
-  const showToastSuccess = () => {
-    const container = document.getElementById("toast-container");
-    const toast = document.createElement("div");
-    toast.className = "alert alert-success";
-    toast.innerHTML = "<span>Beer Added Succesfully.</span>";
-
-    container.appendChild(toast);
-    setTimeout(() => {
-      toast.remove();
-    }, 3000);
-  };
-
-  const showToastFailure = () => {
-    const container = document.getElementById("toast-container");
-    const toast = document.createElement("div");
-    toast.className = "alert alert-error";
-    toast.innerHTML = "<span>Error on adding beer</span>";
-
-    container.appendChild(toast);
-    setTimeout(() => {
-      toast.remove();
-    }, 3000);
-  };
 
   if (loading)
     return (
@@ -126,7 +89,7 @@ function HomePage() {
             <div className="justify-center card-actions">
               <button
                 className="btn btn-primary"
-                onClick={() => handleSubmit(randomBeer)}
+                onClick={() => props.handleSubmit(randomBeer)}
               >
                 Add Beer
               </button>
