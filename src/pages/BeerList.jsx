@@ -3,14 +3,18 @@ import axios from "axios";
 import Toast from "../components/Toast";
 
 const BASE_URL = "https://punkapi.online/v3";
+const API_URL =
+  "https://birrioteca-e9e74-default-rtdb.europe-west1.firebasedatabase.app";
 
 function BeerList(props) {
   const [beers, setBeers] = useState([]);
+  const [cellar, setCellar] = useState([]);
   const totalPages = 14;
   const [currentPage, setCurrentPage] = useState(1);
   const [modalBeer, setModalBeer] = useState({});
   const [loading, setLoading] = useState(true);
 
+  // Beers api
   useEffect(() => {
     axios
       .get(`${BASE_URL}/beers?page=1`)
@@ -24,6 +28,28 @@ function BeerList(props) {
         setLoading(false);
       })
       .catch((error) => console.log("ERROR on GET of list: ", error));
+  }, []);
+
+  //Firebase api
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/beers.json`)
+      .then((response) => {
+        const data = response.data;
+        if (data) {
+          const formatted = Object.entries(data).map(([key, value]) => ({
+            firebaseId: key,
+            ...value,
+          }));
+          console.log(formatted);
+          setCellar(formatted);
+          setLoading(false);
+        } else {
+          setCellar([]);
+          setLoading(false);
+        }
+      })
+      .catch((error) => console.log("Error getting data from API_URL", error));
   }, []);
 
   const handlePageClick = (page) => {
@@ -53,6 +79,8 @@ function BeerList(props) {
     return (
       <span className="loading loading-spinner text-primary loading-xl"></span>
     );
+
+  const fireBaseBeersIds = new Set(cellar.map((beer) => beer.id));
 
   return (
     <div>
@@ -86,12 +114,20 @@ function BeerList(props) {
                 <h2 className="card-title">{beer.name}</h2>
                 <p>{beer.tagline}</p>
                 <div className="card-actions justify-center">
-                  <button
-                    className="btn btn-primary"
-                    onClick={() => props.handleSubmit(beer)}
-                  >
-                    Add Beer
-                  </button>
+                  {!fireBaseBeersIds.has(beer.id) && (
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => {
+                        props.handleSubmit(beer);
+                        setCellar((prev) => [
+                          ...prev,
+                          { id: beer.id, ...beer },
+                        ]);
+                      }}
+                    >
+                      Add Beer
+                    </button>
+                  )}
                   <button
                     className="btn btn-secondary"
                     onClick={() => openModal(beer)}
