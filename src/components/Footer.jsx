@@ -1,5 +1,14 @@
 function Footer() {
-  return <h3 className="text-3xl">Footer</h3>;
+  return (
+    <footer className="footer sm:footer-horizontal footer-center bg-base-300 text-base-content p-4 mt-10">
+      <aside>
+        <p>
+          Copyright © {new Date().getFullYear()} - All right reserved by
+          Birrioteca
+        </p>
+      </aside>
+    </footer>
+  );
 }
 
 export default Footer;

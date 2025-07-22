@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 const BASE_URL = "https://punkapi.online/v3";
@@ -22,9 +23,9 @@ function HomePage() {
       });
   }, []);
 
-  const handleSubmit = () => {
+  const handleSubmit = (beerObj) => {
     axios
-      .post(`${API_URL}/beers.json`, randomBeer)
+      .post(`${API_URL}/beers.json`, beerObj)
       .then((response) => {
         console.log("Success on POST");
         showToastSuccess();
@@ -66,7 +67,16 @@ function HomePage() {
 
   return (
     <main>
-      <h3>Beer of the day</h3>
+      <div className="card w-100 bg-base-200 card-xl shadow-sm m-auto mb-5">
+        <div className="card-body m-auto">
+          <h2 className="card-title text-center">Welcome to the Birrioteca!</h2>
+          <p>Discover Beers, collect them, Try them!</p>
+          <Link to="/beers" className="justify-center card-actions">
+            <button className="btn btn-secondary">More Beers</button>
+          </Link>
+        </div>
+      </div>
+      <h3 className="text-xl">Beer of the day</h3>
       <div className="flex justify-center">
         <div className="card w-96 p-5 bg-base-100 card-xs shadow-sm card-side glass">
           <figure>
@@ -114,7 +124,10 @@ function HomePage() {
             </div>
 
             <div className="justify-center card-actions">
-              <button className="btn btn-primary" onClick={handleSubmit}>
+              <button
+                className="btn btn-primary"
+                onClick={() => handleSubmit(randomBeer)}
+              >
                 Add Beer
               </button>
             </div>
