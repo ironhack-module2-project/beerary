@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Toast from "../components/Toast";
+import { Link } from "react-router-dom";
 
 const API_URL =
   "https://birrioteca-e9e74-default-rtdb.europe-west1.firebasedatabase.app";
@@ -110,11 +111,16 @@ function Cellar() {
                       Show More
                     </button>
                     <button
-                      className="btn btn-secondary btn-sm mt-2 self-center sm:self-start"
+                      className="btn btn-secondary btn-sm mt-2 mr-2 self-center sm:self-start"
                       onClick={() => handleDelete(beer.firebaseId)}
                     >
                       Delete
                     </button>
+                    <Link to={`/cellar/${beer.firebaseId}`}>
+                      <button className="btn btn-accent btn-sm mt-2 self-center sm:self-start">
+                        Rate Beer
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>
