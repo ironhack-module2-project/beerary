@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Toast from "../components/Toast";
 import { Link } from "react-router-dom";
+import StarRating from "../components/StarRating";
 
 const API_URL =
   "https://birrioteca-e9e74-default-rtdb.europe-west1.firebasedatabase.app";
@@ -102,6 +103,7 @@ function Cellar() {
                 />
                 <div className="flex flex-col text-center sm:text-left">
                   <h2 className="text-lg font-bold">{beer.name}</h2>
+                  <StarRating rating={beer.rating} />
                   <p className="italic text-sm text-gray-400">{beer.tagline}</p>
                   <div>
                     <button

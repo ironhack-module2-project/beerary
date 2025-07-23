@@ -28,7 +28,7 @@ function EditBeer() {
 
     const newDetails = {
       ...beer,
-      rating: rating,
+      rating: +rating,
       review: review,
     };
 
