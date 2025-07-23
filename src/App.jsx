@@ -16,7 +16,7 @@ const API_URL =
   "https://birrioteca-e9e74-default-rtdb.europe-west1.firebasedatabase.app";
 
 const handleSubmit = (beerObj) => {
-  beerObj.rating = 1;
+  beerObj.rating = 0;
   beerObj.review = "";
   axios
     .post(`${API_URL}/beers.json`, beerObj)

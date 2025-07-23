@@ -103,7 +103,6 @@ function Cellar() {
                 <div className="flex flex-col text-center sm:text-left">
                   <h2 className="text-lg font-bold">{beer.name}</h2>
                   <p className="italic text-sm text-gray-400">{beer.tagline}</p>
-                  <StarRating rating={beer.rating} />
                   <div>
                     <button
                       className="btn btn-primary btn-sm mt-2 mr-2 self-center sm:self-start"
@@ -143,7 +142,6 @@ function Cellar() {
               />
             </figure>
             <div className="card-body text-left mt-6">
-              <StarRating rating={modalBeer.rating} />
               <p className="italic text-base">{modalBeer.tagline}</p>
               <br />
               <p>{modalBeer.description}</p>
