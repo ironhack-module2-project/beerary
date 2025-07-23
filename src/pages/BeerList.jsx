@@ -159,7 +159,9 @@ function BeerList(props) {
                 <img
                   src={`${BASE_URL}/images/${beer.image}`}
                   alt="beer"
-                  className={`${loaded ? "block" : "hidden"}`}
+                  className={`max-w-[100px] h-[185px] ${
+                    loaded ? "block" : "hidden"
+                  }`}
                   onLoad={() => setLoaded(true)}
                 />
               </figure>

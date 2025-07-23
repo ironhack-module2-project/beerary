@@ -86,7 +86,6 @@ function Cellar() {
 
   return (
     <div>
-      <kbd className="kbd m-4">▲</kbd>
       <div className="flex justify-center">
         <div className="carousel carousel-vertical rounded-box h-[32rem] overflow-y-auto w-full max-w-md p-2">
           {cellar.length === 0 && (
@@ -274,7 +273,6 @@ function Cellar() {
         </dialog>
         <Toast />
       </div>
-      <kbd className="kbd m-4">▼</kbd>
     </div>
   );
 }
