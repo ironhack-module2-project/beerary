@@ -97,11 +97,16 @@ function Cellar() {
 
   return (
     <div className="flex justify-center">
-      <div className="relative w-full max-w-md">
+      <div className="relative w-full max-w-md m-4">
         <div
           className="carousel carousel-vertical rounded-box h-[32rem] overflow-y-auto w-full max-w-md p-2 "
           onScroll={handleCarouselScroll}
         >
+          {cellar.length >= 4 && (
+            <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-lg text-gray-100 animate-bounce">
+              Scroll to see more ↓
+            </div>
+          )}
           {cellar.length === 0 && (
             <p className="text-white p-4">NO BEERS STORED</p>
           )}
