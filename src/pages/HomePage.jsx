@@ -12,6 +12,8 @@ function HomePage(props) {
   const [cellar, setCellar] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const [revealed, setRevealed] = useState(false);
+
   // random beer api
   useEffect(() => {
     axios
@@ -66,9 +68,14 @@ function HomePage(props) {
           </Link>
         </div>
       </div>
-      <h3 className="text-xl">Beer of the day</h3>
+      <h3 className="text-xl m-2">Click to reveal the beer of the day!</h3>
       <div className="flex justify-center">
-        <div className="card w-96 p-5 bg-base-100 card-xs shadow-sm card-side glass">
+        <div
+          className={`card w-96 p-5 bg-base-100 card-xs shadow-sm card-side glass cursor-pointer transition duration-300 ${
+            revealed ? "" : "blur-md pointer-events-auto"
+          }`}
+          onClick={() => setRevealed(true)}
+        >
           <figure>
             <img
               className="max-w-[200px] h-[394px]"
