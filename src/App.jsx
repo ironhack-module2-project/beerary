@@ -16,6 +16,8 @@ const API_URL =
   "https://birrioteca-e9e74-default-rtdb.europe-west1.firebasedatabase.app";
 
 const handleSubmit = (beerObj) => {
+  beerObj.rating = 1;
+  beerObj.review = "";
   axios
     .post(`${API_URL}/beers.json`, beerObj)
     .then(() => {
@@ -54,7 +56,7 @@ function App() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log(currentUser)
+      console.log(currentUser);
     });
     return () => unsubscribe();
   }, []);
@@ -80,7 +82,10 @@ function App() {
       {/* Rutas */}
       <Routes>
         <Route path="/" element={<HomePage handleSubmit={handleSubmit} />} />
-        <Route path="/beers" element={<BeerList handleSubmit={handleSubmit} />} />
+        <Route
+          path="/beers"
+          element={<BeerList handleSubmit={handleSubmit} />}
+        />
         <Route path="/cellar" element={<Cellar />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/login" element={<Login />} />
