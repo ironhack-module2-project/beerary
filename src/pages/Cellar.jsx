@@ -152,6 +152,16 @@ function Cellar() {
               <p className="italic text-base">{modalBeer.tagline}</p>
               <br />
               <p>{modalBeer.description}</p>
+              <div>
+                {modalBeer.review !== "" ? (
+                  <>
+                    <h3 className="font-bold text-sm mb-4">Your review:</h3>
+                    <p>{modalBeer.review}</p>
+                  </>
+                ) : (
+                  <h3 className="font-bold text-sm mb-4">No Review Yet.</h3>
+                )}
+              </div>
             </div>
           </div>
 
