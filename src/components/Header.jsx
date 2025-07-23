@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function Header() {
+function Header(props) {
   return (
     <div className="navbar bg-base-200 mb-10">
       <div className="flex-1"></div>
@@ -14,6 +14,10 @@ function Header() {
 
       <Link to="/cellar" className="flex-1 justify-end flex">
         <button className="btn btn-primary">Your Cellar</button>
+      </Link>
+   
+      <Link to="/login" className="flex-1 justify-end flex">
+        <button className="btn btn-secondary">Log In</button>
       </Link>
     </div>
   );
