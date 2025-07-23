@@ -14,6 +14,7 @@ function BeerList(props) {
   const [currentPage, setCurrentPage] = useState(1);
   const [modalBeer, setModalBeer] = useState({});
   const [loading, setLoading] = useState(true);
+  const [loaded, setLoaded] = useState(false); //for images taking longer to load
 
   // Beers api
   useEffect(() => {
@@ -152,7 +153,15 @@ function BeerList(props) {
           return (
             <div key={beer.id} className="card bg-base-100 shadow-xl glass">
               <figure className="max-h-48 overflow-hidden">
-                <img src={`${BASE_URL}/images/${beer.image}`} alt="beer" />
+                {!loaded && (
+                  <span className="loading loading-spinner loading-md"></span>
+                )}
+                <img
+                  src={`${BASE_URL}/images/${beer.image}`}
+                  alt="beer"
+                  className={`${loaded ? "block" : "hidden"}`}
+                  onLoad={() => setLoaded(true)}
+                />
               </figure>
               <div className="card-body">
                 <h2 className="card-title">{beer.name}</h2>
