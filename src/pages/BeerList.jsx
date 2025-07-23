@@ -9,7 +9,7 @@ const API_URL =
 function BeerList(props) {
   const [beers, setBeers] = useState([]);
   const [cellar, setCellar] = useState([]);
-  const totalPages = 14;
+  const [hasMorePages, setHasMorePages] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [modalBeer, setModalBeer] = useState({});
   const [loading, setLoading] = useState(true);
@@ -63,6 +63,8 @@ function BeerList(props) {
         }));
         console.log(beersArr);
         setBeers(beersArr);
+        setCurrentPage(page);
+        setHasMorePages(beersArr.length === 30);
         setLoading(false);
       })
       .catch((error) => console.log("Error on GET new page: ", error));
@@ -85,22 +87,49 @@ function BeerList(props) {
   return (
     <div>
       <h2 className="text-4xl p-4 m-4">List of beers</h2>
+      {/* Filter fields */}
+      <div className="m-4">
+        <input type="text" placeholder="e.g ipa" className="input" />
+      </div>
       {/* Pagination */}
-      <div className="join">
-        {[...Array(totalPages)].map((_, index) => {
-          const pageNum = index + 1;
-          return (
-            <button
-              key={pageNum}
-              onClick={() => handlePageClick(pageNum)}
-              className={`join-item btn ${
-                currentPage === pageNum ? "btn-primary" : ""
-              }`}
-            >
-              {pageNum}
-            </button>
-          );
-        })}
+      <div className="join my-4 flex flex-wrap gap-2 justify-center">
+        <button
+          onClick={() => handlePageClick(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="btn join-item"
+        >
+          « Previous
+        </button>
+
+        {currentPage > 1 && (
+          <button
+            onClick={() => handlePageClick(currentPage - 1)}
+            className="join-item btn"
+          >
+            {currentPage - 1}
+          </button>
+        )}
+
+        <button className="join-item btn btn-primary" disabled>
+          {currentPage}
+        </button>
+
+        {hasMorePages && (
+          <button
+            onClick={() => handlePageClick(currentPage + 1)}
+            className="join-item btn"
+          >
+            {currentPage + 1}
+          </button>
+        )}
+
+        <button
+          onClick={() => handlePageClick(currentPage + 1)}
+          disabled={!hasMorePages}
+          className="btn join-item"
+        >
+          Next »
+        </button>
       </div>
       {/* grid of beers */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
@@ -295,21 +324,44 @@ function BeerList(props) {
       </dialog>
 
       {/* Pagination */}
-      <div className="join">
-        {[...Array(totalPages)].map((_, index) => {
-          const pageNum = index + 1;
-          return (
-            <button
-              key={pageNum}
-              onClick={() => handlePageClick(pageNum)}
-              className={`join-item btn ${
-                currentPage === pageNum ? "btn-primary" : ""
-              }`}
-            >
-              {pageNum}
-            </button>
-          );
-        })}
+      <div className="join my-4 flex flex-wrap gap-2 justify-center">
+        <button
+          onClick={() => handlePageClick(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="btn join-item"
+        >
+          « Previous
+        </button>
+
+        {currentPage > 1 && (
+          <button
+            onClick={() => handlePageClick(currentPage - 1)}
+            className="join-item btn"
+          >
+            {currentPage - 1}
+          </button>
+        )}
+
+        <button className="join-item btn btn-primary" disabled>
+          {currentPage}
+        </button>
+
+        {hasMorePages && (
+          <button
+            onClick={() => handlePageClick(currentPage + 1)}
+            className="join-item btn"
+          >
+            {currentPage + 1}
+          </button>
+        )}
+
+        <button
+          onClick={() => handlePageClick(currentPage + 1)}
+          disabled={!hasMorePages}
+          className="btn join-item"
+        >
+          Next »
+        </button>
       </div>
     </div>
   );

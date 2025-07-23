@@ -7,7 +7,7 @@ function Header() {
 
       <div className="flex-none">
         <Link to="/" className="btn btn-ghost text-xl">
-          <img src="/barrel.png" alt="Icon" class="w-6 h-6" />
+          <img src="/barrel.png" alt="Icon" className="w-6 h-6" />
           Birrioteca
         </Link>
       </div>
