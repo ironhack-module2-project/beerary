@@ -9,6 +9,7 @@ const API_URL =
 function BeerList(props) {
   const [beers, setBeers] = useState([]);
   const [cellar, setCellar] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [hasMorePages, setHasMorePages] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [modalBeer, setModalBeer] = useState({});
@@ -52,10 +53,14 @@ function BeerList(props) {
       .catch((error) => console.log("Error getting data from API_URL", error));
   }, []);
 
-  const handlePageClick = (page) => {
-    setLoading(true);
+  const handlePageClick = (page, nameFilter = searchTerm) => {
     axios
-      .get(`${BASE_URL}/beers?page=${page}`)
+      .get(`${BASE_URL}/beers`, {
+        params: {
+          page,
+          beer_name: nameFilter || undefined,
+        },
+      })
       .then((response) => {
         const beersArr = Object.keys(response.data).map((id) => ({
           id,
@@ -89,7 +94,17 @@ function BeerList(props) {
       <h2 className="text-4xl p-4 m-4">List of beers</h2>
       {/* Filter fields */}
       <div className="m-4">
-        <input type="text" placeholder="e.g ipa" className="input" />
+        <input
+          type="text"
+          placeholder="e.g ipa"
+          className="input"
+          onChange={(e) => {
+            const value = e.target.value;
+            setSearchTerm(value);
+            setCurrentPage(1);
+            handlePageClick(1, value);
+          }}
+        />
       </div>
       {/* Pagination */}
       <div className="join my-4 flex flex-wrap gap-2 justify-center">
