@@ -25,7 +25,7 @@ function BeerList(props) {
           id,
           ...response.data[id],
         }));
-        console.log(beersArr);
+        // console.log(beersArr);
         setBeers(beersArr);
         setLoading(false);
       })
@@ -43,7 +43,7 @@ function BeerList(props) {
             firebaseId: key,
             ...value,
           }));
-          console.log(formatted);
+          // console.log(formatted);
           setCellar(formatted);
           setLoading(false);
         } else {
@@ -67,7 +67,7 @@ function BeerList(props) {
           id,
           ...response.data[id],
         }));
-        console.log(beersArr);
+        // console.log(beersArr);
         setBeers(beersArr);
         setCurrentPage(page);
         setHasMorePages(beersArr.length === 30);
@@ -168,7 +168,7 @@ function BeerList(props) {
                 />
               </figure>
               <div className="card-body">
-                <h2 className="card-title">{beer.name}</h2>
+                <h2 className="text-xl font-semibold">{beer.name}</h2>
                 <p>{beer.tagline}</p>
                 <div className="card-actions justify-center">
                   {!fireBaseBeersIds.has(beer.id) ? (

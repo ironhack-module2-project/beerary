@@ -22,12 +22,12 @@ const handleSubmit = (beerObj) => {
   axios
     .post(`${API_URL}/beers.json`, beerObj)
     .then(() => {
-      console.log("Success on POST");
-      showToastSuccess();
+      // console.log("Success on POST");
+      // showToastSuccess();
     })
     .catch((error) => {
       console.log("ERROR on POST: ", error);
-      showToastFailure();
+      // showToastFailure();
     });
 };
 
@@ -45,7 +45,7 @@ const showToastFailure = () => {
   const toast = document.createElement("div");
   toast.className = "alert alert-error";
   toast.innerHTML = "<span>Error on adding beer</span>";
-  container.appendChild(toast);
+  // container.appendChild(toast);
   setTimeout(() => toast.remove(), 3000);
 };
 

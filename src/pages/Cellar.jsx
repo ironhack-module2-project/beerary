@@ -38,7 +38,7 @@ function Cellar() {
     axios
       .delete(`${API_URL}/beers/${id}.json`)
       .then(() => {
-        console.log("succes on Delete");
+        // console.log("succes on Delete");
         axios
           .get(`${API_URL}/beers.json`)
           .then((response) => {
@@ -48,7 +48,7 @@ function Cellar() {
                 firebaseId: key,
                 ...value,
               }));
-              console.log(formatted);
+              // console.log(formatted);
               setCellar(formatted);
               setLoading(false);
             } else {
@@ -74,7 +74,7 @@ function Cellar() {
             firebaseId: key,
             ...value,
           }));
-          console.log(formatted);
+          // console.log(formatted);
           setCellar(formatted);
           setLoading(false);
         } else {
@@ -94,10 +94,6 @@ function Cellar() {
     return (
       <span className="loading loading-spinner text-primary loading-xl"></span>
     );
-
-
-
-
 
   return (
     <> 
@@ -161,7 +157,6 @@ function Cellar() {
                       </div>
                     </div>
                   </div>
-                  
                 </div>
                 <Toast/>
                 </>

@@ -19,7 +19,7 @@ function HomePage(props) {
     axios
       .get(`${BASE_URL}/beers/random`)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setRandomBeer(response.data);
         setLoading(false);
       })
@@ -39,7 +39,7 @@ function HomePage(props) {
             firebaseId: key,
             ...value,
           }));
-          console.log(formatted);
+          // console.log(formatted);
           setCellar(formatted);
           setLoading(false);
         } else {
