@@ -146,6 +146,7 @@ function Cellar() {
                     </div>
                   </div>
                 </div>
+                <Toast />
               </div>
             ))}
         </div>
@@ -319,7 +320,6 @@ function Cellar() {
           </p>
         </div>
       </dialog>
-      <Toast />
     </div>
   );
 }

@@ -151,7 +151,10 @@ function BeerList(props) {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
         {beers.map((beer) => {
           return (
-            <div key={beer.id} className="card bg-base-100 shadow-xl glass">
+            <div
+              key={beer.id}
+              className="relative card bg-base-100 shadow-xl glass"
+            >
               <figure className="max-h-48 overflow-hidden">
                 {!loaded && (
                   <span className="loading loading-spinner loading-md"></span>
@@ -194,8 +197,8 @@ function BeerList(props) {
                     More Details
                   </button>
                 </div>
+                <Toast />
               </div>
-              <Toast />
             </div>
           );
         })}
