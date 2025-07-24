@@ -121,7 +121,7 @@ function Cellar() {
                   />
                   <div className="flex flex-col text-center sm:text-left">
                     <h2 className="text-lg font-bold">{beer.name}</h2>
-                    <StarRating rating={beer.rating} />
+                    <StarRating beerId={beer.id} rating={beer.rating} />
                     <p className="italic text-sm text-gray-400">
                       {beer.tagline}
                     </p>

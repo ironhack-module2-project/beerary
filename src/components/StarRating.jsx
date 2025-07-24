@@ -1,4 +1,4 @@
-function StarRating({ rating, max = 5 }) {
+function StarRating({ beerId, rating, max = 5 }) {
   return (
     <div className="rating">
       {Array.from({ length: max }, (_, i) => {
@@ -7,7 +7,7 @@ function StarRating({ rating, max = 5 }) {
           <input
             key={value}
             type="radio"
-            name={`rating-${rating}`}
+            name={`rating-${beerId}`}
             className="mask mask-star-2 bg-orange-400"
             aria-label={`${value} star`}
             checked={value === rating}

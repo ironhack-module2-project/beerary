@@ -17,7 +17,7 @@ function EditBeer() {
       .get(`${API_URL}/beers/${beerId}.json`)
       .then((response) => {
         setBeer(response.data);
-        setRating(response.data.rating);
+        setRating(+response.data.rating);
         setReview(response.data.review);
       })
       .catch((error) => console.log("Error on Get beer: ", error));
