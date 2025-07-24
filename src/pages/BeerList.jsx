@@ -153,7 +153,7 @@ function BeerList(props) {
           return (
             <div
               key={beer.id}
-              className="relative card bg-base-100 shadow-xl glass"
+              className="relative card bg-base-100 shadow-xl glass p-4"
             >
               <figure className="max-h-48 overflow-hidden">
                 {!loaded && (
@@ -162,8 +162,9 @@ function BeerList(props) {
                 <img
                   src={`${BASE_URL}/images/${beer.image}`}
                   alt="beer"
-                  className={`max-w-[100px] h-[185px] ${loaded ? "block" : "hidden"
-                    }`}
+                  className={`max-w-[100px] h-[185px] ${
+                    loaded ? "block" : "hidden"
+                  }`}
                   onLoad={() => setLoaded(true)}
                 />
               </figure>
@@ -185,15 +186,13 @@ function BeerList(props) {
                       Add Beer
                     </button>
                   ) : (
-
                     <button
                       className="btn cursor-not-allowed opacity-50"
-                      style={{ backgroundColor: '#22c55e', color: 'white' }}
+                      style={{ backgroundColor: "#22c55e", color: "white" }}
                       disabled
                     >
                       Added
                     </button>
-
                   )}
                   <button
                     className="btn btn-secondary"
@@ -202,7 +201,6 @@ function BeerList(props) {
                     More Details
                   </button>
                 </div>
-
               </div>
             </div>
           );
