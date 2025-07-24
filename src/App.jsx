@@ -1,8 +1,8 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+//import { onAuthStateChanged, signOut } from "firebase/auth";
 
-import { auth } from "./firebase";
+//import { auth } from "./firebase";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
