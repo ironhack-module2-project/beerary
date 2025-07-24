@@ -50,27 +50,27 @@ const showToastFailure = () => {
 };
 
 function App() {
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate();
+  // const [user, setUser] = useState(null);
+  // const navigate = useNavigate();
 
   // Detectar sesión activa
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      console.log(currentUser);
-    });
-    return () => unsubscribe();
-  }, []);
+  // useEffect(() => {
+  //   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+  //     setUser(currentUser);
+  //     console.log(currentUser);
+  //   });
+  //   return () => unsubscribe();
+  // }, []);
 
-  // Logout
-  const handleLogout = () => {
-    signOut(auth)
-      .then(() => {
-        console.log("Sesión cerrada");
-        navigate("/");
-      })
-      .catch((error) => console.error("Error al cerrar sesión:", error));
-  };
+  // // Logout
+  // const handleLogout = () => {
+  //   signOut(auth)
+  //     .then(() => {
+  //       console.log("Sesión cerrada");
+  //       navigate("/");
+  //     })
+  //     .catch((error) => console.error("Error al cerrar sesión:", error));
+  // };
 
   return (
     <div className="text-center">
@@ -78,7 +78,7 @@ function App() {
       <div id="toast-container" className="fixed top-2 right-2 z-50"></div>
 
       {/* Header con estado user y logout */}
-      <Header user={user} onLogout={handleLogout} />
+      <Header />
 
       {/* Rutas */}
       <Routes>
