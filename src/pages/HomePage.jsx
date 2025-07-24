@@ -59,7 +59,7 @@ function HomePage(props) {
 
   return (
     <main>
-      <div className="card w-100 bg-base-200 card-xl shadow-sm m-auto mb-5">
+      <div className="card w-100 bg-base-300 card-xl shadow-sm m-auto mb-5">
         <div className="card-body m-auto">
           <h2 className="card-title text-center">Welcome to the Beerary!</h2>
           <p>Discover Beers, collect them, Try them!</p>

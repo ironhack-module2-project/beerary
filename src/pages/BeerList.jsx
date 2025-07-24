@@ -162,9 +162,8 @@ function BeerList(props) {
                 <img
                   src={`${BASE_URL}/images/${beer.image}`}
                   alt="beer"
-                  className={`max-w-[100px] h-[185px] ${
-                    loaded ? "block" : "hidden"
-                  }`}
+                  className={`max-w-[100px] h-[185px] ${loaded ? "block" : "hidden"
+                    }`}
                   onLoad={() => setLoaded(true)}
                 />
               </figure>
@@ -186,9 +185,15 @@ function BeerList(props) {
                       Add Beer
                     </button>
                   ) : (
-                    <button className="btn btn-secondary" disabled>
-                      Already Added
+
+                    <button
+                      className="btn cursor-not-allowed opacity-50"
+                      style={{ backgroundColor: '#22c55e', color: 'white' }}
+                      disabled
+                    >
+                      Added
                     </button>
+
                   )}
                   <button
                     className="btn btn-secondary"
@@ -197,7 +202,7 @@ function BeerList(props) {
                     More Details
                   </button>
                 </div>
-                <Toast />
+
               </div>
             </div>
           );
