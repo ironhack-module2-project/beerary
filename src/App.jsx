@@ -9,7 +9,7 @@ import HomePage from "./pages/HomePage";
 import AboutUs from "./pages/AboutUs";
 import Cellar from "./pages/Cellar";
 import BeerList from "./pages/BeerList";
-import Login from "./pages/Login";
+//import Login from "./pages/Login";
 import axios from "axios";
 import EditBeer from "./pages/EditBeer";
 
@@ -90,7 +90,7 @@ function App() {
         <Route path="/cellar" element={<Cellar />} />
         <Route path="/cellar/:beerId" element={<EditBeer />} />
         <Route path="/about" element={<AboutUs />} />
-        <Route path="/login" element={<Login />} />
+        {/* <Route path="/login" element={<Login />} /> */}
       </Routes>
 
       <Footer />
