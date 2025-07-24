@@ -71,9 +71,8 @@ function HomePage(props) {
       <h3 className="text-xl m-2">Click to reveal the beer of the day!</h3>
       <div className="flex justify-center">
         <div
-          className={`card w-96 p-5 bg-base-100 card-xs shadow-sm card-side glass cursor-pointer transition duration-300 ${
-            revealed ? "" : "blur-md pointer-events-auto"
-          }`}
+          className={`card w-96 p-5 bg-base-100 card-xs shadow-sm card-side glass cursor-pointer transition duration-300 ${revealed ? "" : "blur-md pointer-events-auto"
+            }`}
           onClick={() => setRevealed(true)}
         >
           <figure>
@@ -135,8 +134,12 @@ function HomePage(props) {
                   Add Beer
                 </button>
               ) : (
-                <button className="btn btn-secondary" disabled>
-                  Already Added
+                <button
+                  className="btn cursor-not-allowed opacity-50"
+                  style={{ backgroundColor: '#22c55e', color: 'white' }}
+                  disabled
+                >
+                  Added
                 </button>
               )}
             </div>

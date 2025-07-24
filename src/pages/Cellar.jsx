@@ -117,8 +117,10 @@ function Cellar() {
               </div>
             )}
             {cellar.length === 0 && (
-              
+              <>
               <p className="text-white p-4">NO BEERS STORED</p>
+              <img src="https://c.tenor.com/P0FF5DJd1-AAAAAd/tenor.gif" alt="homer GIF"></img>
+              </>
             )}
             {cellar &&
               cellar.map((beer) => (
