@@ -9,7 +9,7 @@ Whether you're a casual drinker or a seasoned connoisseur, Beerary helps you dis
 ## Features
 
 - 🔎 Search and explore a wide variety of beers
-- 📄 Detailed beer information from the [Punk API](https://punkapi.com/)
+- 📄 Detailed beer information from the [Punk API](https://github.com/alxiw/punkapi)
 - ❤️ Save and manage your favorite beers (Firebase Database)
 - ⚡ Fast, responsive UI built with React and Vite
 - 📡 Efficient data fetching with Axios
