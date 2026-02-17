@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Toast from "../components/Toast";
 
-const BASE_URL = "https://punkapi.online/v3";
+const BASE_URL = "https://punkapi-alxiw.amvera.io/v3";
 const API_URL =
   "https://birrioteca-e9e74-default-rtdb.europe-west1.firebasedatabase.app";
 

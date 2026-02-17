@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Toast from "../components/Toast";
 
-const BASE_URL = "https://punkapi.online/v3";
+const BASE_URL = "https://punkapi-alxiw.amvera.io/v3";
 const API_URL =
   "https://birrioteca-e9e74-default-rtdb.europe-west1.firebasedatabase.app";
 
@@ -71,8 +71,9 @@ function HomePage(props) {
       <h3 className="text-xl m-2">Click to reveal the beer of the day!</h3>
       <div className="flex justify-center">
         <div
-          className={`card w-96 p-5 bg-base-100 card-xs shadow-sm card-side glass cursor-pointer transition duration-300 ${revealed ? "" : "blur-md pointer-events-auto"
-            }`}
+          className={`card w-96 p-5 bg-base-100 card-xs shadow-sm card-side glass cursor-pointer transition duration-300 ${
+            revealed ? "" : "blur-md pointer-events-auto"
+          }`}
           onClick={() => setRevealed(true)}
         >
           <figure>
@@ -136,7 +137,7 @@ function HomePage(props) {
               ) : (
                 <button
                   className="btn cursor-not-allowed opacity-50"
-                  style={{ backgroundColor: '#22c55e', color: 'white' }}
+                  style={{ backgroundColor: "#22c55e", color: "white" }}
                   disabled
                 >
                   Added

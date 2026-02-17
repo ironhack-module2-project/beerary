@@ -6,7 +6,7 @@ import StarRating from "../components/StarRating";
 
 const API_URL =
   "https://birrioteca-e9e74-default-rtdb.europe-west1.firebasedatabase.app";
-const BASE_URL = "https://punkapi.online/v3";
+const BASE_URL = "https://punkapi-alxiw.amvera.io/v3";
 
 const showToastDelete = () => {
   const container = document.getElementById("toast-container");
@@ -58,7 +58,7 @@ function Cellar() {
             showToastDelete();
           })
           .catch((error) =>
-            console.log("Error getting data from API_URL", error)
+            console.log("Error getting data from API_URL", error),
           );
       })
       .catch((error) => console.log("ERROR on DELETE element", error));
@@ -96,8 +96,8 @@ function Cellar() {
     );
 
   return (
-    <> 
-     {/* botón  */ }
+    <>
+      {/* botón  */}
       <div className="flex justify-center my-4">
         <Link to="/beers">
           <button className="btn btn-secondary">Add More Beers</button>
@@ -105,7 +105,6 @@ function Cellar() {
       </div>
 
       <div className="flex justify-center">
-
         <div className="relative w-full max-w-md m-4">
           <div
             className="carousel carousel-vertical rounded-box h-[32rem] overflow-y-auto w-full max-w-md p-2 "
@@ -118,63 +117,68 @@ function Cellar() {
             )}
             {cellar.length === 0 && (
               <>
-              <p className="text-white p-4">NO BEERS STORED</p>
-              <img src="https://c.tenor.com/P0FF5DJd1-AAAAAd/tenor.gif" alt="homer GIF"></img>
+                <p className="text-white p-4">NO BEERS STORED</p>
+                <img
+                  src="https://c.tenor.com/P0FF5DJd1-AAAAAd/tenor.gif"
+                  alt="homer GIF"
+                ></img>
               </>
             )}
             {cellar &&
               cellar.map((beer) => (
                 <>
-                <div key={beer.id} className="carousel-item mb-4 ">
-                  <div className="glass flex flex-col sm:flex-row items-center sm:items-start gap-4 p-4 bg-base-200 rounded-lg w-full">
-                    <img
-                      src={`${BASE_URL}/images/${beer.image}`}
-                      alt={beer.name}
-                      className="w-24 h-24 object-contain rounded"
-                    />
-                    <div className="flex flex-col text-center sm:text-left">
-                      <h2 className="text-lg font-bold">{beer.name}</h2>
-                      <StarRating beerId={beer.id} rating={beer.rating} />
-                      <p className="italic text-sm text-gray-400">
-                        {beer.tagline}
-                      </p>
-                      <div>
-                        <button
-                          className="btn btn-primary btn-sm mt-2 mr-2 self-center sm:self-start"
-                          onClick={() => openModal(beer)}
-                        >
-                          Show More
-                        </button>
-                        <button
-                          className="btn btn-secondary btn-sm mt-2 mr-2 self-center sm:self-start"
-                          onClick={() => handleDelete(beer.firebaseId)}
-                        >
-                          Delete
-                        </button>
-                        <Link to={`/cellar/${beer.firebaseId}`}>
-                          <button className="btn btn-accent btn-sm mt-2 self-center sm:self-start">
-                            Rate Beer
+                  <div key={beer.id} className="carousel-item mb-4 ">
+                    <div className="glass flex flex-col sm:flex-row items-center sm:items-start gap-4 p-4 bg-base-200 rounded-lg w-full">
+                      <img
+                        src={`${BASE_URL}/images/${beer.image}`}
+                        alt={beer.name}
+                        className="w-24 h-24 object-contain rounded"
+                      />
+                      <div className="flex flex-col text-center sm:text-left">
+                        <h2 className="text-lg font-bold">{beer.name}</h2>
+                        <StarRating beerId={beer.id} rating={beer.rating} />
+                        <p className="italic text-sm text-gray-400">
+                          {beer.tagline}
+                        </p>
+                        <div>
+                          <button
+                            className="btn btn-primary btn-sm mt-2 mr-2 self-center sm:self-start"
+                            onClick={() => openModal(beer)}
+                          >
+                            Show More
                           </button>
-                        </Link>
+                          <button
+                            className="btn btn-secondary btn-sm mt-2 mr-2 self-center sm:self-start"
+                            onClick={() => handleDelete(beer.firebaseId)}
+                          >
+                            Delete
+                          </button>
+                          <Link to={`/cellar/${beer.firebaseId}`}>
+                            <button className="btn btn-accent btn-sm mt-2 self-center sm:self-start">
+                              Rate Beer
+                            </button>
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <Toast/>
+                  <Toast />
                 </>
               ))}
           </div>
 
           {/* Top shadow */}
           <div
-            className={`pointer-events-none absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-base-100 to-transparent transition-opacity duration-300 ${showTopShadow ? "opacity-50" : "opacity-0"
-              }`}
+            className={`pointer-events-none absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-base-100 to-transparent transition-opacity duration-300 ${
+              showTopShadow ? "opacity-50" : "opacity-0"
+            }`}
           />
 
           {/* Bottom shadow */}
           <div
-            className={`pointer-events-none absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-base-100 to-transparent transition-opacity duration-300 ${showBottomShadow ? "opacity-100" : "opacity-0"
-              }`}
+            className={`pointer-events-none absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-base-100 to-transparent transition-opacity duration-300 ${
+              showBottomShadow ? "opacity-100" : "opacity-0"
+            }`}
           />
         </div>
         <dialog id="my_modal_3" className="modal">
@@ -249,7 +253,8 @@ function Cellar() {
                       <li>Target FG: {modalBeer.target_fg}</li>
                       <li>Target OG: {modalBeer.target_og}</li>
                       <li>
-                        Volume: {modalBeer.volume?.value} {modalBeer.volume?.unit}
+                        Volume: {modalBeer.volume?.value}{" "}
+                        {modalBeer.volume?.unit}
                       </li>
                       <li>
                         Boil Volume: {modalBeer.boil_volume?.value}{" "}
@@ -290,7 +295,7 @@ function Cellar() {
                       </p>
                     )}
                   </div>
-                  
+
                   {/* Ingredients */}
                   <div>
                     <h4 className="font-semibold text-base">Ingredients</h4>
@@ -321,7 +326,9 @@ function Cellar() {
                   {/* Contributed by */}
                   {modalBeer.contributed_by && (
                     <div>
-                      <h4 className="font-semibold text-base">Contributed by</h4>
+                      <h4 className="font-semibold text-base">
+                        Contributed by
+                      </h4>
                       <p className="ml-4">{modalBeer.contributed_by}</p>
                     </div>
                   )}
